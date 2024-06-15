@@ -1,0 +1,35 @@
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>Acerca de Nosotros</h2>
+                <p>Descripción breve de tu sitio web o empresa.</p>
+                <div class="contact">
+                    <span><i class="fas fa-phone"></i> Teléfono: +123456789</span>
+                    <span><i class="fas fa-envelope"></i> Email: info@tudominio.com</span>
+                </div>
+                <div class="socials">
+                    <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section links">
+                <h2>Enlaces Rápidos</h2>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Inicio</a></li>
+                    <li><a href="{{ url_for('listar_aeropuertos') }}">Aeropuertos</a></li>
+                    <li><a href="{{ url_for('listar_vuelos') }}">Vuelos</a></li>
+                    <li><a href="{{ url_for('agregar_vuelo') }}">Agregar Vuelo</a></li>
+                    <!-- Agrega más enlaces según sea necesario -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        &copy; {{ year }} Tu Empresa. Todos los derechos reservados.
+    </div>
+</footer>

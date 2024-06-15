@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Vuelos</title>
+    <!-- Aquí puedes incluir tus estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Listado de Vuelos</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Número de Vuelo</th>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Fecha</th>
+                <th>Hora de Salida</th>
+                <th>Hora de Llegada</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vuelo in vuelos %}
+            <tr>
+                <td>{{ vuelo.numero_vuelo }}</td>
+                <td>{{ vuelo.origen }}</td>
+                <td>{{ vuelo.destino }}</td>
+                <td>{{ vuelo.fecha }}</td>
+                <td>{{ vuelo.hora_salida }}</td>
+                <td>{{ vuelo.hora_llegada }}</td>
+                <td>{{ vuelo.estado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para agregar un nuevo vuelo -->
+    <a href="{{ url_for('agregar_vuelo') }}" class="btn">Agregar Vuelo</a>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Enlaces a otras páginas -->
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Inicio</a></li>
+        <li><a href="{{ url_for('listar_aeropuertos') }}">Ver Aeropuertos</a></li>
+        <!-- Agrega más enlaces según sea necesario -->
+    </ul>
+</body>
+</html>

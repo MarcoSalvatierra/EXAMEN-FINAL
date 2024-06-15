@@ -1,0 +1,35 @@
+<style>
+    .navbar {
+        background-color: black;
+    }
+
+    .navbar-brand a {
+        color: white;
+    }
+
+    .navbar-menu {
+        display: flex;
+        background-color: black;
+    }
+
+    .nav-link {
+        color: white;
+    }
+</style>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="{{ url_for('home') }}" class="logo">VUELOS RAPIDOS</a>
+        </div>
+        <div class="navbar-menu">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="{{ url_for('listar_aeropuertos') }}" class="nav-link">Aeropuertos</a></li>
+                <li class="nav-item"><a href="{{ url_for('listar_vuelos') }}" class="nav-link">Vuelos</a></li>
+                <li class="nav-item"><a href="{{ url_for('agregar_vuelo') }}" class="nav-link">Agregar Vuelo</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+

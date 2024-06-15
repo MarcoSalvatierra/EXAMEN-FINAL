@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Vuelo</title>
+    <!-- Aquí puedes incluir tus estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Agregar Vuelo</h1>
+
+    <!-- Formulario para agregar vuelo -->
+    <form action="{{ url_for('agregar_vuelo') }}" method="POST">
+        <div>
+            <label for="numero_vuelo">Número de Vuelo:</label>
+            <input type="text" id="numero_vuelo" name="numero_vuelo" required>
+        </div>
+        <div>
+            <label for="origen">Origen:</label>
+            <select id="origen" name="origen" required>
+                {% for aeropuerto in aeropuertos %}
+                    <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="destino">Destino:</label>
+            <select id="destino" name="destino" required>
+                {% for aeropuerto in aeropuertos %}
+                    <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div>
+        <div>
+            <label for="hora_salida">Hora de Salida:</label>
+            <input type="time" id="hora_salida" name="hora_salida" required>
+        </div>
+        <div>
+            <label for="hora_llegada">Hora de Llegada:</label>
+            <input type="time" id="hora_llegada" name="hora_llegada" required>
+        </div>
+        <div>
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" name="estado" required>
+        </div>
+        <div>
+            <button type="submit">Agregar Vuelo</button>
+        </div>
+    </form>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Enlaces a otras páginas -->
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Inicio</a></li>
+        <li><a href="{{ url_for('listar_vuelos') }}">Ver Vuelos</a></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Aeropuertos</title>
+    <!-- Aquí puedes incluir tus estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Listado de Aeropuertos</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Código Aeropuerto</th>
+                <th>Nombre</th>
+                <th>Ciudad</th>
+                <th>País</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aeropuerto in aeropuertos %}
+            <tr>
+                <td>{{ aeropuerto.codigo_aeropuerto }}</td>
+                <td>{{ aeropuerto.nombre }}</td>
+                <td>{{ aeropuerto.ciudad }}</td>
+                <td>{{ aeropuerto.pais }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para agregar un nuevo aeropuerto -->
+    <a href="{{ url_for('agregar_aeropuerto') }}" class="btn">Agregar Aeropuerto</a>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Enlaces a otras páginas -->
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Inicio</a></li>
+        <li><a href="{{ url_for('listar_vuelos') }}">Ver Vuelos</a></li>
+        <!-- Agrega más enlaces según sea necesario -->
+    </ul>
+</body>
+</html>
