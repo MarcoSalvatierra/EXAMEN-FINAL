@@ -3,41 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Aeropuerto</title>
-    <!-- Aquí puedes incluir tus estilos CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Listado de Aeropuertos</title>
+    <!-- Asegúrate de incluir el enlace al CSS de Bootstrap en tu <head> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>Agregar Aeropuerto</h1>
+<body class="bg-light">
 
-    <!-- Formulario para agregar aeropuerto -->
-    <form action="{{ url_for('agregar_aeropuerto') }}" method="POST">
-        <div>
-            <label for="codigo_aeropuerto">Código Aeropuerto:</label>
-            <input type="text" id="codigo_aeropuerto" name="codigo_aeropuerto" required>
-        </div>
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
-        </div>
-        <div>
-            <label for="ciudad">Ciudad:</label>
-            <input type="text" id="ciudad" name="ciudad" required>
-        </div>
-        <div>
-            <label for="pais">País:</label>
-            <input type="text" id="pais" name="pais" required>
-        </div>
-        <div>
-            <button type="submit">Agregar Aeropuerto</button>
-        </div>
-    </form>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Listado de Aeropuertos</h1>
 
-    <!-- Enlaces a otras páginas -->
-    <ul class="nav-links">
-        <li><a href="{{ url_for('home') }}">Inicio</a></li>
-        <li><a href="{{ url_for('listar_aeropuertos') }}">Ver Aeropuertos</a></li>
-        <!-- Agrega más enlaces según sea necesario -->
-    </ul>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Código Aeropuerto</th>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aeropuerto in aeropuertos %}
+                <tr>
+                    <td>{{ aeropuerto.codigo_aeropuerto }}</td>
+                    <td>{{ aeropuerto.nombre }}</td>
+                    <td>{{ aeropuerto.ciudad }}</td>
+                    <td>{{ aeropuerto.pais }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Botón de inicio con el mismo estilo que el botón de agregar aeropuerto -->
+        <a href="{{ url_for('home') }}" class="btn btn-primary mt-3">Inicio</a>
+
+    </div>
+
 </body>
 </html>

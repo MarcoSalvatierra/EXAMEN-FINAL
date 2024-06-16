@@ -62,6 +62,10 @@ def listar_vuelos():
 # Agregar vuelo
 @app.route('/vuelos/agregar', methods=['GET', 'POST'])
 def agregar_vuelo():
+    session = DBSession()
+    aeropuertos = session.query(Aeropuertos).all()
+    session.close()
+
     if request.method == 'POST':
         try:
             session = DBSession()
@@ -83,7 +87,8 @@ def agregar_vuelo():
         except Exception as e:
             session.rollback()
             flash(f'Error al agregar vuelo: {e}', 'error')
-    return render_template('agregar_vuelo.html')
+
+    return render_template('agregar_vuelo.html', aeropuertos=aeropuertos)
 
 if __name__ == '__main__':
     app.run(debug=True)

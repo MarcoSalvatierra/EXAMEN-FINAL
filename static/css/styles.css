@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('../images/2.png');
+    background-size: 100% 53%; /* Esto ajustará la imagen para que llene completamente el contenedor */
+    background-position: 40% 15%; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+.content {
+    flex: 1;
+}
+

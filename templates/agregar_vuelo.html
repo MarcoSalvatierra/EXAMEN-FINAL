@@ -4,70 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Vuelo</title>
-    <!-- Aquí puedes incluir tus estilos CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Incluir Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Agregar Vuelo</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Agregar Vuelo</h1>
 
-    <!-- Formulario para agregar vuelo -->
-    <form action="{{ url_for('agregar_vuelo') }}" method="POST">
-        <div>
-            <label for="numero_vuelo">Número de Vuelo:</label>
-            <input type="text" id="numero_vuelo" name="numero_vuelo" required>
-        </div>
-        <div>
-            <label for="origen">Origen:</label>
-            <select id="origen" name="origen" required>
-                {% for aeropuerto in aeropuertos %}
-                    <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div>
-            <label for="destino">Destino:</label>
-            <select id="destino" name="destino" required>
-                {% for aeropuerto in aeropuertos %}
-                    <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div>
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
-        </div>
-        <div>
-            <label for="hora_salida">Hora de Salida:</label>
-            <input type="time" id="hora_salida" name="hora_salida" required>
-        </div>
-        <div>
-            <label for="hora_llegada">Hora de Llegada:</label>
-            <input type="time" id="hora_llegada" name="hora_llegada" required>
-        </div>
-        <div>
-            <label for="estado">Estado:</label>
-            <input type="text" id="estado" name="estado" required>
-        </div>
-        <div>
-            <button type="submit">Agregar Vuelo</button>
-        </div>
-    </form>
+        <!-- Formulario para agregar vuelo -->
+        <form action="{{ url_for('agregar_vuelo') }}" method="POST">
+            <div class="form-group">
+                <label for="numero_vuelo">Número de Vuelo:</label>
+                <input type="text" class="form-control" id="numero_vuelo" name="numero_vuelo" required>
+            </div>
+            <div class="form-group">
+                <label for="origen">Origen:</label>
+                <select class="form-control" id="origen" name="origen" required>
+                    {% for aeropuerto in aeropuertos %}
+                        <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }} ({{ aeropuerto.ciudad }}, {{ aeropuerto.pais }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="destino">Destino:</label>
+                <select class="form-control" id="destino" name="destino" required>
+                    {% for aeropuerto in aeropuertos %}
+                        <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }} ({{ aeropuerto.ciudad }}, {{ aeropuerto.pais }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" required>
+            </div>
+            <div class="form-group">
+                <label for="hora_salida">Hora de Salida:</label>
+                <input type="time" class="form-control" id="hora_salida" name="hora_salida" required>
+            </div>
+            <div class="form-group">
+                <label for="hora_llegada">Hora de Llegada:</label>
+                <input type="time" class="form-control" id="hora_llegada" name="hora_llegada" required>
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <input type="text" class="form-control" id="estado" name="estado" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Vuelo</button>
+        </form>
 
-    <!-- Flash messages -->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-info mt-4" role="alert">
+                    <ul class="mb-0">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
 
-    <!-- Enlaces a otras páginas -->
-    <ul class="nav-links">
-        <li><a href="{{ url_for('home') }}">Inicio</a></li>
-        <li><a href="{{ url_for('listar_vuelos') }}">Ver Vuelos</a></li>
-    </ul>
+        <!-- Enlaces a otras páginas como botones -->
+        <div class="mt-4">
+            <a href="{{ url_for('home') }}" class="btn btn-secondary">Inicio</a>
+            <a href="{{ url_for('listar_vuelos') }}" class="btn btn-secondary">Ver Vuelos</a>
+        </div>
+    </div>
+
+    <!-- Incluir Bootstrap JS y dependencias de Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
