@@ -15,6 +15,8 @@ CREATE TABLE Vuelos (
     estado VARCHAR(50) -- ej. 'Programado', 'Cancelado', 'Retrasado'
 );
 
+select * from vuelos;
+
 CREATE TABLE Pasajeros (
     id_pasajero SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
