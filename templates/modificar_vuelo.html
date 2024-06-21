@@ -1,0 +1,83 @@
+<!-- modificar_vuelo.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Vuelo</title>
+    <!-- Incluir estilos CSS si es necesario -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Personaliza los estilos aquí */
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        /* ... otros estilos ... */
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Modificar Vuelo</h2>
+        <hr>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="numero_vuelo">Número de Vuelo</label>
+                <input type="text" class="form-control" id="numero_vuelo" name="numero_vuelo" value="{{ vuelo.numero_vuelo }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="origen">Origen</label>
+                <select class="form-control" id="origen" name="origen">
+                    {% for aeropuerto in aeropuertos %}
+                    <option value="{{ aeropuerto.codigo_aeropuerto }}" {% if aeropuerto.codigo_aeropuerto == vuelo.origen %} selected {% endif %}>{{ aeropuerto.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="destino">Destino</label>
+                <select class="form-control" id="destino" name="destino">
+                    {% for aeropuerto in aeropuertos %}
+                    <option value="{{ aeropuerto.codigo_aeropuerto }}" {% if aeropuerto.codigo_aeropuerto == vuelo.destino %} selected {% endif %}>{{ aeropuerto.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" value="{{ vuelo.fecha }}">
+            </div>
+            <div class="form-group">
+                <label for="hora_salida">Hora de Salida</label>
+                <input type="time" class="form-control" id="hora_salida" name="hora_salida" value="{{ vuelo.hora_salida.strftime('%H:%M') }}">
+            </div>
+            <div class="form-group">
+                <label for="hora_llegada">Hora de Llegada</label>
+                <input type="time" class="form-control" id="hora_llegada" name="hora_llegada" value="{{ vuelo.hora_llegada.strftime('%H:%M') }}">
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <input type="text" class="form-control" id="estado" name="estado" value="{{ vuelo.estado }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="{{ url_for('listar_vuelos') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

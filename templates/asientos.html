@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Asientos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Listado de Asientos</h1>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Número de Vuelo</th>
+                    <th scope="col">Número de Asiento</th>
+                    <th scope="col">Clase</th>
+                    <th scope="col">Disponible</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asiento in asientos %}
+                <tr>
+                    <td>{{ asiento.numero_vuelo }}</td>
+                    <td>{{ asiento.numero_asiento }}</td>
+                    <td>{{ asiento.clase }}</td>
+                    <td>{{ 'Sí' if asiento.disponible else 'No' }}</td>
+                    <td>
+                        <a href="{{ url_for('modificar_asiento', id_asiento=asiento.id_asiento) }}" class="btn btn-warning btn-sm">Modificar</a>
+                        <form action="{{ url_for('eliminar_asiento', id_asiento=asiento.id_asiento) }}" method="post" style="display:inline-block;">
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('agregar_asiento') }}" class="btn btn-primary mb-3">Agregar Asiento</a>
+
+        <!-- Botón para ir a inicio -->
+        <a href="{{ url_for('home') }}" class="btn btn-secondary mb-3">Inicio</a>
+    </div>
+</body>
+</html>

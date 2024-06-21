@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Reservas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Listado de Reservas</h1>
+
+        <!-- Tabla con estilos de Bootstrap -->
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID Reserva</th>
+                    <th scope="col">Pasajero</th>
+                    <th scope="col">Asiento</th>
+                    <th scope="col">Fecha de Reserva</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reserva in reservas %}
+                <tr>
+                    <td>{{ reserva.id_reserva }}</td>
+                    <td>{{ reserva.pasajero.nombre }} {{ reserva.pasajero.apellido }}</td>
+                    <td>{{ reserva.asiento.numero_asiento }}</td>
+                    <td>{{ reserva.fecha_reserva }}</td>
+                    <td>{{ reserva.estado }}</td>
+                    <td>
+                        <a href="{{ url_for('modificar_reserva', id_reserva=reserva.id_reserva) }}" class="btn btn-warning btn-sm">Modificar</a>
+                        <form action="{{ url_for('eliminar_reserva', id_reserva=reserva.id_reserva) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Botón para agregar una nueva reserva con estilo de Bootstrap -->
+        <a href="{{ url_for('agregar_reserva') }}" class="btn btn-primary mb-3">Agregar Reserva</a>
+
+        <!-- Botón para ir a inicio -->
+        <a href="{{ url_for('home') }}" class="btn btn-secondary mb-3">Inicio</a>
+
+        <!-- Flash messages con estilo de alerta de Bootstrap -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+</body>
+</html>

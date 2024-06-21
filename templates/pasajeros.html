@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Pasajeros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Listado de Pasajeros</h1>
+
+        <!-- Tabla con estilos de Bootstrap -->
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pasajero in pasajeros %}
+                <tr>
+                    <td>{{ pasajero.id_pasajero }}</td>
+                    <td>{{ pasajero.nombre }}</td>
+                    <td>{{ pasajero.apellido }}</td>
+                    <td>{{ pasajero.email }}</td>
+                    <td>{{ pasajero.telefono }}</td>
+                    <td>
+                        <a href="{{ url_for('modificar_pasajero', id_pasajero=pasajero.id_pasajero) }}" class="btn btn-primary btn-sm">Modificar</a>
+                        <form action="{{ url_for('eliminar_pasajero', id_pasajero=pasajero.id_pasajero) }}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este pasajero?')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Botón para agregar un nuevo pasajero con estilo de Bootstrap -->
+        <a href="{{ url_for('agregar_pasajero') }}" class="btn btn-primary mb-3">Agregar Pasajero</a>
+
+        <!-- Flash messages con estilo de alerta de Bootstrap -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Navegación con estilos de lista de Bootstrap -->
+        <ul class="nav nav-pills nav-fill mt-3">
+            <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link active">Inicio</a></li>
+            <li class="nav-item"><a href="{{ url_for('listar_aeropuertos') }}" class="nav-link">Ver Aeropuertos</a></li>
+            <!-- Agrega más enlaces según sea necesario -->
+        </ul>
+
+    </div>
+
+</body>
+</html>

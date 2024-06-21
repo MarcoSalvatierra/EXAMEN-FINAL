@@ -1,10 +1,11 @@
+<!-- vuelos.html -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Vuelos</title>
-    <!-- Asegúrate de incluir el enlace al CSS de Bootstrap en tu <head> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
@@ -23,6 +24,7 @@
                     <th scope="col">Hora de Salida</th>
                     <th scope="col">Hora de Llegada</th>
                     <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>  <!-- Columna para acciones -->
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +37,12 @@
                     <td>{{ vuelo.hora_salida }}</td>
                     <td>{{ vuelo.hora_llegada }}</td>
                     <td>{{ vuelo.estado }}</td>
+                    <td>
+                        <a href="{{ url_for('modificar_vuelo', numero_vuelo=vuelo.numero_vuelo) }}" class="btn btn-sm btn-primary">Modificar</a>
+                        <form method="POST" action="{{ url_for('eliminar_vuelo', numero_vuelo=vuelo.numero_vuelo) }}" style="display: inline;">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este vuelo?')">Eliminar</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
