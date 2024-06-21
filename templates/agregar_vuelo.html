@@ -6,11 +6,30 @@
     <title>Agregar Vuelo</title>
     <!-- Incluir Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Agrega tu archivo CSS personalizado si es necesario -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Color de fondo */
+        }
+        .container {
+            background-color: #ffffff; /* Color de fondo del formulario */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1); /* Sombra suave */
+        }
+        .btn-cancel {
+            background-color: #6c757d; /* Color de fondo para botón cancelar */
+            border-color: #6c757d; /* Color del borde para botón cancelar */
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268; /* Color de fondo al pasar el mouse para botón cancelar */
+            border-color: #545b62; /* Color del borde al pasar el mouse para botón cancelar */
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Agregar Vuelo</h1>
+        <h1 class="mb-4 text-center">Agregar Vuelo</h1>
 
         <!-- Formulario para agregar vuelo -->
         <form action="{{ url_for('agregar_vuelo') }}" method="POST">
@@ -18,39 +37,44 @@
                 <label for="numero_vuelo">Número de Vuelo:</label>
                 <input type="text" class="form-control" id="numero_vuelo" name="numero_vuelo" required>
             </div>
-            <div class="form-group">
-                <label for="origen">Origen:</label>
-                <select class="form-control" id="origen" name="origen" required>
-                    {% for aeropuerto in aeropuertos %}
-                        <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }} ({{ aeropuerto.ciudad }}, {{ aeropuerto.pais }})</option>
-                    {% endfor %}
-                </select>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="origen">Origen:</label>
+                    <select class="form-control" id="origen" name="origen" required>
+                        {% for aeropuerto in aeropuertos %}
+                            <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }} ({{ aeropuerto.ciudad }}, {{ aeropuerto.pais }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="destino">Destino:</label>
+                    <select class="form-control" id="destino" name="destino" required>
+                        {% for aeropuerto in aeropuertos %}
+                            <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }} ({{ aeropuerto.ciudad }}, {{ aeropuerto.pais }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="destino">Destino:</label>
-                <select class="form-control" id="destino" name="destino" required>
-                    {% for aeropuerto in aeropuertos %}
-                        <option value="{{ aeropuerto.codigo_aeropuerto }}">{{ aeropuerto.nombre }} ({{ aeropuerto.ciudad }}, {{ aeropuerto.pais }})</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="fecha">Fecha:</label>
-                <input type="date" class="form-control" id="fecha" name="fecha" required>
-            </div>
-            <div class="form-group">
-                <label for="hora_salida">Hora de Salida:</label>
-                <input type="time" class="form-control" id="hora_salida" name="hora_salida" required>
-            </div>
-            <div class="form-group">
-                <label for="hora_llegada">Hora de Llegada:</label>
-                <input type="time" class="form-control" id="hora_llegada" name="hora_llegada" required>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="hora_salida">Hora de Salida:</label>
+                    <input type="time" class="form-control" id="hora_salida" name="hora_salida" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="hora_llegada">Hora de Llegada:</label>
+                    <input type="time" class="form-control" id="hora_llegada" name="hora_llegada" required>
+                </div>
             </div>
             <div class="form-group">
                 <label for="estado">Estado:</label>
                 <input type="text" class="form-control" id="estado" name="estado" required>
             </div>
-            <button type="submit" class="btn btn-primary">Agregar Vuelo</button>
+            <button type="submit" class="btn btn-primary mr-2">Agregar Vuelo</button>
+            <a href="{{ url_for('home') }}" class="btn btn-cancel">Cancelar</a>
         </form>
 
         <!-- Flash messages -->
@@ -66,11 +90,6 @@
             {% endif %}
         {% endwith %}
 
-        <!-- Enlaces a otras páginas como botones -->
-        <div class="mt-4">
-            <a href="{{ url_for('home') }}" class="btn btn-secondary">Inicio</a>
-            <a href="{{ url_for('listar_vuelos') }}" class="btn btn-secondary">Ver Vuelos</a>
-        </div>
     </div>
 
     <!-- Incluir Bootstrap JS y dependencias de Popper.js -->

@@ -4,49 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Pasajero</title>
+    <!-- Incluir Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body class="bg-light">
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Agregar Pasajero</h1>
-
-        <!-- Formulario con estilo de Bootstrap -->
-        <form method="post">
-            <!-- Campos del formulario -->
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+        <div class="card">
+            <h5 class="card-header bg-primary text-white text-center">Agregar Pasajero</h5>
+            <div class="card-body">
+                <form method="post">
+                    <!-- Campo Nombre -->
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <!-- Campo Apellido -->
+                    <div class="form-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" required>
+                    </div>
+                    <!-- Campo Email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <!-- Campo Teléfono -->
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" required>
+                    </div>
+                    <!-- Botones para enviar el formulario y cancelar -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mr-2">Agregar Pasajero</button>
+                        <a href="{{ url_for('listar_pasajeros') }}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" class="form-control" id="apellido" name="apellido" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" required>
-            </div>
-
-            <!-- Botones para enviar el formulario y cancelar -->
-            <button type="submit" class="btn btn-primary">Agregar Pasajero</button>
-            <a href="{{ url_for('listar_pasajeros') }}" class="btn btn-secondary">Cancelar</a>
-        </form>
+        </div>
 
         <!-- Flash messages con estilo de alerta de Bootstrap -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-info mt-3" role="alert">{{ message }}</div>
-                {% endfor %}
+                <div class="alert alert-info mt-3" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
             {% endif %}
         {% endwith %}
 
     </div>
 
+    <!-- Incluir Bootstrap JS y dependencias de Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

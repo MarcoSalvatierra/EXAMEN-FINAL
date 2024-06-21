@@ -4,13 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Aeropuertos</title>
-    <!-- Asegúrate de incluir el enlace al CSS de Bootstrap en tu <head> -->
+    <!-- Enlaces a los archivos CSS de Bootstrap y personalizado -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Color de fondo */
+        }
+        .container {
+            background-color: #ffffff; /* Color de fondo del contenedor */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1); /* Sombra suave */
+            margin-top: 20px; /* Margen superior */
+        }
+        .table {
+            margin-bottom: 30px; /* Margen inferior para la tabla */
+        }
+        .alert {
+            margin-bottom: 20px; /* Margen inferior para el mensaje de alerta */
+        }
+        .pagination {
+            margin-top: 20px; /* Margen superior para la navegación de páginas */
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <div class="container mt-5">
+    <div class="container">
         <h1 class="text-center mb-4">Listado de Aeropuertos</h1>
 
         <!-- Tabla con estilos de Bootstrap -->
@@ -39,16 +60,18 @@
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="alert alert-success" role="alert">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
+                    <ul class="mb-0">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             {% endif %}
         {% endwith %}
 
         <!-- Navegación con estilos de píldoras de Bootstrap -->
         <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-lg justify-content-center">
+            <ul class="pagination justify-content-center">
                 <!-- Botón Inicio con estilo de píldora activa -->
                 <li class="page-item active"><a class="page-link" href="{{ url_for('home') }}">Inicio</a></li>
                 <!-- Agrega más botones según sea necesario -->
@@ -57,5 +80,9 @@
 
     </div>
 
+    <!-- Scripts de Bootstrap y dependencias de Popper.js y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

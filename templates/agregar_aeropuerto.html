@@ -13,28 +13,31 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Listado de Aeropuertos</h1>
 
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Código Aeropuerto</th>
-                    <th>Nombre</th>
-                    <th>Ciudad</th>
-                    <th>País</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for aeropuerto in aeropuertos %}
-                <tr>
-                    <td>{{ aeropuerto.codigo_aeropuerto }}</td>
-                    <td>{{ aeropuerto.nombre }}</td>
-                    <td>{{ aeropuerto.ciudad }}</td>
-                    <td>{{ aeropuerto.pais }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <!-- Tabla con estilos de Bootstrap -->
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Código Aeropuerto</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">País</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aeropuerto in aeropuertos %}
+                    <tr>
+                        <td>{{ aeropuerto.codigo_aeropuerto }}</td>
+                        <td>{{ aeropuerto.nombre }}</td>
+                        <td>{{ aeropuerto.ciudad }}</td>
+                        <td>{{ aeropuerto.pais }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-        <!-- Flash messages -->
+        <!-- Flash messages con estilo de alerta de Bootstrap -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="alert alert-success" role="alert">
@@ -50,5 +53,9 @@
 
     </div>
 
+    <!-- Scripts de Bootstrap y dependencias de Popper.js y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

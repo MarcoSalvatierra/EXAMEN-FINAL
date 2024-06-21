@@ -4,42 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Reserva</title>
+    <!-- Incluir Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body class="bg-light">
+
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Agregar Reserva</h1>
-        <form method="post">
-            <div class="form-group">
-                <label for="id_pasajero">Pasajero</label>
-                <select class="form-control" id="id_pasajero" name="id_pasajero" required>
-                    {% for pasajero in pasajeros %}
-                    <option value="{{ pasajero.id_pasajero }}">{{ pasajero.nombre }} {{ pasajero.apellido }}</option>
-                    {% endfor %}
-                </select>
+        <div class="card">
+            <h5 class="card-header bg-primary text-white text-center">Agregar Reserva</h5>
+            <div class="card-body">
+                <form method="post">
+                    <!-- Selector de Pasajero -->
+                    <div class="form-group">
+                        <label for="id_pasajero">Pasajero</label>
+                        <select class="form-control" id="id_pasajero" name="id_pasajero" required>
+                            {% for pasajero in pasajeros %}
+                            <option value="{{ pasajero.id_pasajero }}">{{ pasajero.nombre }} {{ pasajero.apellido }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Selector de Asiento -->
+                    <div class="form-group">
+                        <label for="id_asiento">Asiento</label>
+                        <select class="form-control" id="id_asiento" name="id_asiento" required>
+                            {% for asiento in asientos %}
+                            <option value="{{ asiento.id_asiento }}">{{ asiento.numero_asiento }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Campo Fecha de Reserva -->
+                    <div class="form-group">
+                        <label for="fecha_reserva">Fecha de Reserva</label>
+                        <input type="date" class="form-control" id="fecha_reserva" name="fecha_reserva" required>
+                    </div>
+                    <!-- Campo Estado -->
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <input type="text" class="form-control" id="estado" name="estado" required>
+                    </div>
+                    <!-- Botones para enviar el formulario y cancelar -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mr-2">Agregar Reserva</button>
+                        <a href="{{ url_for('listar_reservas') }}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="id_asiento">Asiento</label>
-                <select class="form-control" id="id_asiento" name="id_asiento" required>
-                    {% for asiento in asientos %}
-                    <option value="{{ asiento.id_asiento }}">{{ asiento.numero_asiento }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="fecha_reserva">Fecha de Reserva</label>
-                <input type="date" class="form-control" id="fecha_reserva" name="fecha_reserva" required>
-            </div>
-            <div class="form-group">
-                <label for="estado">Estado</label>
-                <input type="text" class="form-control" id="estado" name="estado" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Agregar Reserva</button>
-            <a href="{{ url_for('listar_reservas') }}" class="btn btn-secondary">Cancelar</a>
-        </form>
+        </div>
+
         <!-- Botón para ir a inicio -->
-        <a href="{{ url_for('home') }}" class="btn btn-secondary mb-3">Inicio</a>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Inicio</a>
     </div>
+
+    <!-- Incluir Bootstrap JS y dependencias de Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
